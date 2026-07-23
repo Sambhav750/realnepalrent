@@ -4,7 +4,7 @@ session_start();
 
 
 include 'config/db_connect.php';
-include 'includes/header.php';
+
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

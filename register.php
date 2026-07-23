@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include 'config/db_connect.php'
 
 if($_SERVER["REQUEST_METHOD"]== "POST"){
@@ -31,7 +33,18 @@ if($_SERVER["REQUEST_METHOD"]== "POST"){
             $error "The email already exists";
         }
         else{
-            $hashed_password = hash_password($password, PASSWORD_DEFAULT)
+            $hashed_password = hash_password($password, PASSWORD_DEFAULT);
+
+            $sql = "INSERT INTO customers (C_Name, C_Email, C_Phone, C_Password) 
+                    VALUES ('$name', '$email', '$phone', '$hashed_password')";
+            
+            if ($conn->query($sql) === TRUE) {
+                // Success - redirect to login
+                header("Location: login.php?msg=Registration Successful. Please Login.");
+                exit();
+            } else {
+                $error = "Registration failed: " . $conn->error;
+            }
         }
     }
 

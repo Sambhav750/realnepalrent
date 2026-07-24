@@ -26,10 +26,10 @@ if (isset($conn) && $conn) {
     <nav class="navbar">
         <div class="container">
             <div class="nav-left">
-                <a href="index.php" class="logo">🚗 NepalRent</a>
+                <a href="index.php" class="logo">NepalRent</a>
                 <?php if ($available_count > 0): ?>
                     <span class="header-available-badge">
-                        🚗 <span id="headerCarCount"><?php echo $available_count; ?></span>
+                        <span id="headerCarCount"><?php echo $available_count; ?></span>
                     </span>
                 <?php endif; ?>
             </div>

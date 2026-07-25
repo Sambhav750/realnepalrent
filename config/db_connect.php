@@ -1,5 +1,5 @@
 <?php
-$servername = "localhosst";
+$servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "nepalrent_db";

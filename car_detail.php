@@ -133,6 +133,8 @@ $total_reviews = $rating_data['total_reviews'] ?? 0;
             </div>
         <?php endif; ?>
 
+        //review section
+
         <?php if (isset($_SESSION['CustomerID'])): ?>
             <?php
             $check_sql = "SELECT * FROM bookings 

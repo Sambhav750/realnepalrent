@@ -2,6 +2,7 @@
 include 'includes/header.php';
 include 'config/db_connect.php';
 
+
 $carID = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($carID == 0) {
@@ -89,7 +90,7 @@ $total_reviews = $rating_data['total_reviews'] ?? 0;
                     NPR <?php echo number_format($car['Price_Per_Day']); ?> <span>/ day</span>
                 </div>
                 <div class="car-rating">
-                    ⭐ <?php echo $avg_rating; ?> / 5 (<?php echo $total_reviews; ?> reviews)
+                     (<?php echo $total_reviews; ?> reviews)
                 </div>
                 <div class="car-description">
                     <h4>Description</h4>

@@ -53,20 +53,36 @@ $types_result = $conn->query("SELECT DISTINCT Car_Type FROM cars");
         </div>
     </section>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Rent the Perfect Car for Your Journey</h1>
-                <p>Explore Nepal with our reliable and affordable car rental service.</p>
+  
+
+   <!-- Hero Section -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text">
                 <div class="available-badge">
-                    <span class="count-icon"></span>
-                    <span class="count-number" id="heroCarCount"><?php echo $available_count; ?></span>
+                    <span class="count-number"><?php echo $available_count; ?></span>
                     <span class="count-text">Cars Available Now!</span>
                 </div>
-                <a href="#cars" class="btn btn-hero">Browse Cars</a>
+                <h1>Rent the Perfect Car for <span>Your Journey</span></h1>
+                <p>Explore Nepal with our reliable and affordable car rental service.</p>
+                <div class="hero-tagline">
+                    <span class="line"></span>
+                    <span>Trusted by 10,000+ customers</span>
+                </div>
+                <div class="hero-actions">
+                    <a href="#cars" class="btn-hero">Browse Cars</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="car-display">
+                    <img src="assets/images/hyundai.png" alt="">
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <section class="filter-section">
         <div class="container">

@@ -21,8 +21,8 @@
                 </div>
                 <div class="footer-section">
                     <h4>Contact</h4>
-                    <p>info@nepalrent.com</p>
-                    <p>+977-98XXXXXXXX</p>
+                    <p>nepalrent@gmail.com</p>
+                    <p>+977-9866267267</p>
                     <p>Kathmandu, Nepal</p>
                 </div>
             </div>

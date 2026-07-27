@@ -737,8 +737,7 @@ body.dark-mode .form-group textarea {
     outline: none;
     box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
 }
-
-/* Auth Pages (Login/Register) */
+/* login and register */
 .auth-container {
     max-width: 480px;
     margin: 40px auto;

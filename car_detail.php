@@ -134,7 +134,7 @@ $total_reviews = $rating_data['total_reviews'] ?? 0;
             </div>
         <?php endif; ?>
 
-        //review section
+       
 
         <?php if (isset($_SESSION['CustomerID'])): ?>
             <?php
@@ -154,16 +154,7 @@ $total_reviews = $rating_data['total_reviews'] ?? 0;
                         <input type="hidden" name="car_id" value="<?php echo $carID; ?>">
                         <input type="hidden" name="booking_id" value="<?php echo $booking['BookingID']; ?>">
                         
-                        <div class="form-group">
-                            <label>Your Rating</label>
-                            <div class="star-rating">
-                                <input type="radio" name="rating" value="5" id="star5"><label for="star5">⭐</label>
-                                <input type="radio" name="rating" value="4" id="star4"><label for="star4">⭐</label>
-                                <input type="radio" name="rating" value="3" id="star3"><label for="star3">⭐</label>
-                                <input type="radio" name="rating" value="2" id="star2"><label for="star2">⭐</label>
-                                <input type="radio" name="rating" value="1" id="star1"><label for="star1">⭐</label>
-                            </div>
-                        </div>
+                        
                         
                         <div class="form-group">
                             <label>Your Review</label>

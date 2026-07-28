@@ -61,10 +61,7 @@ $types_result = $conn->query("SELECT DISTINCT Car_Type FROM cars");
     <div class="container">
         <div class="hero-content">
             <div class="hero-text">
-                <div class="available-badge">
-                    <span class="count-number"><?php echo $available_count; ?></span>
-                    <span class="count-text">Cars Available Now!</span>
-                </div>
+              
                 <h1>Rent the Perfect Car for <span>Your Journey</span></h1>
                 <p>Explore Nepal with our reliable and affordable car rental service.</p>
                 <div class="hero-tagline">
@@ -73,6 +70,10 @@ $types_result = $conn->query("SELECT DISTINCT Car_Type FROM cars");
                 </div>
                 <div class="hero-actions">
                     <a href="#cars" class="btn-hero">Browse Cars</a>
+                </div><br>
+                <div class="available-badge">
+                    <span class="count-number"><?php echo $available_count; ?></span>
+                    <span class="count-text">Cars Available Now!</span>
                 </div>
             </div>
             <div class="hero-image">

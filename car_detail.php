@@ -72,12 +72,16 @@ $total_reviews = $rating_data['total_reviews'] ?? 0;
 
         <div class="car-detail">
             <div class="car-detail-image">
-                <?php if (!empty($car['Image'])): ?>
-                    <img src="assets/images/<?php echo $car['Image']; ?>" alt="<?php echo $car['Brand'] . ' ' . $car['Model']; ?>">
-                <?php else: ?>
-                    <img src="assets/images/car-placeholder.jpg" alt="Car">
-                <?php endif; ?>
-            </div>
+            <?php
+            $imagePath = "assets/images/" . $car['Image'];
+
+            if (!empty($car['Image']) && file_exists($imagePath)) {
+                echo '<img src="' . $imagePath . '" alt="Car">';
+            } else {
+                echo '<img src="assets/images/car-placeholder.jpg" alt="Car">';
+            }
+            ?>
+        </div>
 
             <div class="car-detail-info">
                 <h1><?php echo $car['Brand'] . ' ' . $car['Model']; ?></h1>

@@ -30,6 +30,10 @@ $recent_bookings = $conn->query($recent_sql);
     <title>Admin Dashboard - NepalRent</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
+
+        :root {
+            --aprimary: #245481;
+        }
         /* Admin Styles */
         .admin-body {
             display: flex;
@@ -47,15 +51,19 @@ $recent_bookings = $conn->query($recent_sql);
             top: 0;
             bottom: 0;
             overflow-y: auto;
+            
         }
         .sidebar .logo {
             text-align: center;
             padding: 20px 0;
             border-bottom: 1px solid #333;
             margin-bottom: 20px;
+            display: grid;
+           
+            
         }
         .sidebar .logo h2 {
-            color: #f97316;
+            color: var(--aprimary);
             margin: 0;
         }
         .sidebar .logo p {
@@ -138,15 +146,15 @@ $recent_bookings = $conn->query($recent_sql);
         .stat-card .number {
             font-size: 28px;
             font-weight: bold;
-            color: #f97316;
+            color: var(--aprimary);
         }
         .stat-card .label {
             color: #888;
             font-size: 14px;
             margin-top: 5px;
         }
-        .stat-card.pending .number { color: #f59e0b; }
-        .stat-card.revenue .number { color: #8b5cf6; }
+        .stat-card.pending .number { color: var(--aprimary); }
+        .stat-card.revenue .number { color: var(--aprimary); }
         .table-container {
             background: white;
             padding: 20px;
@@ -196,16 +204,10 @@ $recent_bookings = $conn->query($recent_sql);
             text-decoration: none;
             display: inline-block;
         }
-        .btn-primary { background: #f97316; color: white; }
-        .btn-primary:hover { background: #ea580c; }
+        .btn-primary { background: var(--aprimary); color: white; }
+        .btn-primary:hover { background: var(--aprimary); }
 
-        @media (max-width: 768px) {
-            .sidebar { width: 60px; padding: 10px 0; }
-            .sidebar .logo h2, .sidebar .logo p, .sidebar ul li a span { display: none; }
-            .sidebar ul li { padding: 12px 15px; text-align: center; }
-            .sidebar ul li a .icon { font-size: 22px; width: auto; }
-            .main-content { margin-left: 60px; }
-            .stats-grid { grid-template-columns: 1fr 1fr; }
+        
         }
     </style>
 </head>

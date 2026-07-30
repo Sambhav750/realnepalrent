@@ -220,12 +220,12 @@ $recent_bookings = $conn->query($recent_sql);
                 <p>Admin Panel</p>
             </div>
             <ul>
-                <li class="active"><a href="index.php"><span class="icon">📊</span><span>Dashboard</span></a></li>
-                <li><a href="cars.php"><span class="icon">🚙</span><span>Cars</span></a></li>
-                <li><a href="bookings.php"><span class="icon">📅</span><span>Bookings</span></a></li>
-                <li><a href="customers.php"><span class="icon">👤</span><span>Customers</span></a></li>
-                <li><a href="reports.php"><span class="icon">📈</span><span>Reports</span></a></li>
-                <li class="logout-link"><a href="logout.php"><span class="icon">🚪</span><span>Logout</span></a></li>
+                <li class="active"><a href="index.php"><span class="icon"></span><span>Dashboard</span></a></li>
+                <li><a href="cars.php"><span class="icon"></span><span>Cars</span></a></li>
+                <li><a href="bookings.php"><span class="icon"></span><span>Bookings</span></a></li>
+                <li><a href="customers.php"><span class="icon"></span><span>Customers</span></a></li>
+                <li><a href="reports.php"><span class="icon"></span><span>Reports</span></a></li>
+                <li class="logout-link"><a href="logout.php"><span class="icon"></span><span>Logout</span></a></li>
             </ul>
         </div>
 

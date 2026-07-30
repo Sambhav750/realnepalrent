@@ -355,7 +355,7 @@ $cars = $conn->query("SELECT * FROM cars ORDER BY CreatedAt DESC");
                                             <?php echo $car['Availability_Status']; ?>
                                         </span>
                                     </td>
-                                    <td>   9
+                                    <td>   
                                         <a href="cars.php?edit=<?php echo $car['CarID']; ?>" class="btn-small btn-warning">Edit</a>
                                         <a href="cars.php?delete=<?php echo $car['CarID']; ?>" class="btn-small btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
                                     </td>

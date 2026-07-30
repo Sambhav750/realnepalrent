@@ -25,7 +25,11 @@ if (isset($conn) && $conn) {
         <div class="container">
             <div class="nav-left">
                 <a href="index.php" class="logo">NepalRent</a>
+<<<<<<< HEAD
                
+=======
+                
+>>>>>>> 8ebf663 (rework)
             </div>
             <div class="nav-right">
                 <ul class="nav-links">

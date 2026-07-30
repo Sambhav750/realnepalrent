@@ -220,7 +220,7 @@ body.dark-mode .ticker-section {
 
 .ticker-content {
     display: flex;
-    animation: scrollTicker 30s linear infinite;
+    animation: scrollTicker 50s linear infinite;
     white-space: nowrap;
     gap: 40px;
 }
@@ -393,58 +393,6 @@ body.dark-mode .ticker-section {
     align-items: center;
 }
 
-/* Hero responsive */
-@media (max-width: 992px) {
-    .hero-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    .hero-text p {
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .hero-text .hero-tagline {
-        justify-content: center;
-    }
-    .hero-actions {
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-    .hero-image .car-display .car-icon {
-        font-size: 120px;
-    }
-    .hero {
-        padding: 40px 24px;
-    }
-    .hero-text h1 {
-        font-size: 30px;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        padding: 30px 16px;
-    }
-    .hero-text h1 {
-        font-size: 24px;
-    }
-    .hero-text p {
-        font-size: 15px;
-    }
-    .hero-image .car-display .car-icon {
-        font-size: 80px;
-    }
-    .available-badge {
-        padding: 8px 16px;
-    }
-    .available-badge .count-number {
-        font-size: 20px;
-    }
-    .btn-hero {
-        padding: 10px 24px !important;
-        font-size: 14px !important;
-    }
-}
 
 /* Filter Section */
 .filter-section {
@@ -1242,67 +1190,3 @@ body.dark-mode .alert-danger {
     border-color: #991b1b;
 }
 
-/* Responsive Design */
-@media (max-width: 992px) {
-    .filter-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero {
-        padding: 40px 24px;
-    }
-    .footer-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    .car-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-    .filter-grid {
-        grid-template-columns: 1fr;
-    }
-    .car-detail {
-        grid-template-columns: 1fr;
-        padding: 15px;
-    }
-    .booking-form {
-        grid-template-columns: 1fr 1fr;
-    }
-    .ticker-wrapper {
-        flex-direction: column;
-        gap: 8px;
-    }
-    .ticker-container {
-        height: 40px;
-    }
-    .ticker-content {
-        animation: scrollTicker 20s linear infinite;
-    }
-    .navbar .container {
-        flex-direction: column;
-        gap: 8px;
-    }
-    .nav-links {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        padding: 30px 16px;
-    }
-    .hero-text h1 {
-        font-size: 22px;
-    }
-    .car-grid {
-        grid-template-columns: 1fr;
-    }
-    .booking-form {
-        grid-template-columns: 1fr;
-    }
-    .auth-container {
-        padding: 24px;
-    }
-}

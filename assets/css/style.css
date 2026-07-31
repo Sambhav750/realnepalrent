@@ -424,7 +424,7 @@ body.dark-mode .filter-box h3 {
 
 .filter-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr auto;
     gap: 16px;
     align-items: end;
 }

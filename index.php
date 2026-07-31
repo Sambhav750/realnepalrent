@@ -6,15 +6,20 @@ include 'includes/functions.php';
 $available_count = getAvailableCarsCount($conn);
 $recent_bookings = getRecentBookings($conn, 5);
 
+// Get filter values from URL
 $car_type = isset($_GET['car_type']) ? $_GET['car_type'] : '';
+$brand = isset($_GET['brand']) ? $_GET['brand'] : '';
 $min_price = isset($_GET['min_price']) ? $_GET['min_price'] : '';
 $max_price = isset($_GET['max_price']) ? $_GET['max_price'] : '';
 
-
+// Build SQL query with filters
 $sql = "SELECT * FROM cars WHERE Availability_Status = 'Available'";
 
 if (!empty($car_type)) {
     $sql .= " AND Car_Type = '$car_type'";
+}
+if (!empty($brand)) {
+    $sql .= " AND Brand = '$brand'";
 }
 if (!empty($min_price)) {
     $sql .= " AND Price_Per_Day >= $min_price";
@@ -25,7 +30,10 @@ if (!empty($max_price)) {
 $sql .= " ORDER BY CreatedAt DESC";
 $result = $conn->query($sql);
 
+// Get car types for filter dropdown
 $types_result = $conn->query("SELECT DISTINCT Car_Type FROM cars");
+// Get car brands for filter dropdown
+$brands_result = $conn->query("SELECT DISTINCT Brand FROM cars");
 ?>
 
 
@@ -85,41 +93,52 @@ $types_result = $conn->query("SELECT DISTINCT Car_Type FROM cars");
     </div>
 </section>
 
-    <section class="filter-section">
-        <div class="container">
-            <div class="filter-box">
-                <h3>Filter Cars</h3>
-                <form method="GET" action="index.php">
-                    <div class="filter-grid">
-                        <div class="form-group">
-                            <label>Car Type</label>
-                            <select name="car_type">
-                                <option value="">All Types</option>
-                                <?php while ($type = $types_result->fetch_assoc()): ?>
-                                    <option value="<?php echo $type['Car_Type']; ?>" <?php echo ($car_type == $type['Car_Type']) ? 'selected' : ''; ?>>
-                                        <?php echo $type['Car_Type']; ?>
-                                    </option>
-                                <?php endwhile; ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Min Price (NPR)</label>
-                            <input type="number" name="min_price" placeholder="0" value="<?php echo $min_price; ?>">
-                        </div>
-                        <div class="form-group">
-                            <label>Max Price (NPR)</label>
-                            <input type="number" name="max_price" placeholder="10000" value="<?php echo $max_price; ?>">
-                        </div>
-                        <div class="form-group" style="display: flex; gap: 10px;">
-                            <button type="submit" class="btn">Apply Filter</button>
-                            <a href="index.php" class="btn btn-reset">Reset</a>
-                        </div>
+    <!-- Filter Section -->
+<section class="filter-section">
+    <div class="container">
+        <div class="filter-box">
+            <h3>Filter Cars</h3>
+            <form method="GET" action="index.php">
+                <div class="filter-grid">
+                    <div class="form-group">
+                        <label>Car Type</label>
+                        <select name="car_type">
+                            <option value="">All Types</option>
+                            <?php while ($type = $types_result->fetch_assoc()): ?>
+                                <option value="<?php echo $type['Car_Type']; ?>" <?php echo ($car_type == $type['Car_Type']) ? 'selected' : ''; ?>>
+                                    <?php echo $type['Car_Type']; ?>
+                                </option>
+                            <?php endwhile; ?>
+                        </select>
                     </div>
-                </form>
-            </div>
+                    <div class="form-group">
+                        <label>Brand</label>
+                        <select name="brand">
+                            <option value="">All Brands</option>
+                            <?php while ($brand_row = $brands_result->fetch_assoc()): ?>
+                                <option value="<?php echo $brand_row['Brand']; ?>" <?php echo ($brand == $brand_row['Brand']) ? 'selected' : ''; ?>>
+                                    <?php echo $brand_row['Brand']; ?>
+                                </option>
+                            <?php endwhile; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Min Price (NPR)</label>
+                        <input type="number" name="min_price" placeholder="0" value="<?php echo $min_price; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label>Max Price (NPR)</label>
+                        <input type="number" name="max_price" placeholder="10000" value="<?php echo $max_price; ?>">
+                    </div>
+                    <div class="form-group" style="display: flex; gap: 10px;">
+                        <button type="submit" class="btn">Apply Filter</button>
+                        <a href="index.php" class="btn btn-reset">Reset</a>
+                    </div>
+                </div>
+            </form>
         </div>
-    </section>
-
+    </div>
+</section>
     <section id="cars">
         <div class="container">
             <h2>Available Cars</h2>

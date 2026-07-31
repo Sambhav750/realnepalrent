@@ -2,6 +2,7 @@
 include 'includes/header.php';
 include 'config/db_connect.php';
 
+// Check if user is logged in
 if (!isset($_SESSION['CustomerID'])) {
     header("Location: login.php");
     exit();
@@ -9,6 +10,7 @@ if (!isset($_SESSION['CustomerID'])) {
 
 $customerID = $_SESSION['CustomerID'];
 
+// Get user's bookings
 $sql = "SELECT b.*, c.Brand, c.Model, c.Car_Type, c.Price_Per_Day 
         FROM bookings b 
         JOIN cars c ON b.CarID = c.CarID 
@@ -16,43 +18,48 @@ $sql = "SELECT b.*, c.Brand, c.Model, c.Car_Type, c.Price_Per_Day
         ORDER BY b.Booking_Date DESC";
 $bookings = $conn->query($sql);
 
+// Get user details
 $user_sql = "SELECT * FROM customers WHERE CustomerID = $customerID";
 $user = $conn->query($user_sql)->fetch_assoc();
 
+// Get booking stats
 $total_bookings = $conn->query("SELECT COUNT(*) FROM bookings WHERE CustomerID = $customerID")->fetch_row()[0];
 $pending_bookings = $conn->query("SELECT COUNT(*) FROM bookings WHERE CustomerID = $customerID AND Booking_Status = 'Pending'")->fetch_row()[0];
 $completed_bookings = $conn->query("SELECT COUNT(*) FROM bookings WHERE CustomerID = $customerID AND Booking_Status = 'Completed'")->fetch_row()[0];
 ?>
 
 <div class="container">
+    <!-- Dashboard Header -->
     <div class="dashboard-header">
         <div>
             <h1>Dashboard</h1>
             <p>Welcome back, <strong><?php echo $_SESSION['C_Name']; ?></strong>!</p>
         </div>
-        <a href="logout.php" class="btn btn-danger">Logout</a>
+        
     </div>
 
+    <!-- Stats Cards -->
     <div class="dashboard-stats">
         <div class="stat-card">
-            <h3><?php echo $total_bookings; ?></h3>
-            <p>Total Bookings</p>
+            <div class="number"><?php echo $total_bookings; ?></div>
+            <div class="label">Total Bookings</div>
         </div>
-        <div class="stat-card">
-            <h3><?php echo $pending_bookings; ?></h3>
-            <p>Pending</p>
+        <div class="stat-card pending">
+            <div class="number"><?php echo $pending_bookings; ?></div>
+            <div class="label">Pending</div>
         </div>
-        <div class="stat-card">
-            <h3><?php echo $completed_bookings; ?></h3>
-            <p>Completed</p>
+        <div class="stat-card completed">
+            <div class="number"><?php echo $completed_bookings; ?></div>
+            <div class="label">Completed</div>
         </div>
-        <div class="stat-card">
-            <h3><?php echo $user['C_Phone'] ?: 'N/A'; ?></h3>
-            <p>Phone</p>
+        <div class="stat-card phone">
+            <div class="number"><?php echo $user['C_Phone'] ?: 'N/A'; ?></div>
+            <div class="label">Phone</div>
         </div>
     </div>
 
-    <div class="profile-section">
+    <!-- Profile Section (Card) -->
+    <div class="profile-section card">
         <h3>My Profile</h3>
         <table>
             <tr><td><strong>Name:</strong></td><td><?php echo $user['C_Name']; ?></td></tr>
@@ -62,10 +69,11 @@ $completed_bookings = $conn->query("SELECT COUNT(*) FROM bookings WHERE Customer
         </table>
     </div>
 
+    <!-- Bookings Table -->
     <h3>My Bookings</h3>
     <?php if ($bookings->num_rows > 0): ?>
-        <div class="table-responsive">
-            <table class="bookings-table">
+        <div class="table-container">
+            <table>
                 <thead>
                     <tr>
                         <th>Booking ID</th>
@@ -93,7 +101,7 @@ $completed_bookings = $conn->query("SELECT COUNT(*) FROM bookings WHERE Customer
                                 elseif ($row['Booking_Status'] == 'Completed') $status_class = 'status-completed';
                                 elseif ($row['Booking_Status'] == 'Cancelled') $status_class = 'status-cancelled';
                                 ?>
-                                <span class="booking-status <?php echo $status_class; ?>">
+                                <span class="status-badge <?php echo $status_class; ?>">
                                     <?php echo $row['Booking_Status']; ?>
                                 </span>
                             </td>
@@ -110,8 +118,8 @@ $completed_bookings = $conn->query("SELECT COUNT(*) FROM bookings WHERE Customer
     <?php endif; ?>
 </div>
 
-<?php
-$extra_css = '
+<style>
+    /* Add any missing styles to match admin */
     .dashboard-header {
         display: flex;
         justify-content: space-between;
@@ -121,81 +129,114 @@ $extra_css = '
     }
     .dashboard-header h1 {
         font-size: 28px;
+        margin: 0;
     }
+    .dashboard-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    .stat-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        text-align: center;
+        border: 1px solid #e2e8f0;
+    }
+    .stat-card .number {
+        font-size: 32px;
+        font-weight: 800;
+        color: #f97316;
+    }
+    .stat-card .label {
+        color: #64748b;
+        font-size: 14px;
+        margin-top: 4px;
+    }
+    .stat-card.pending .number { color: #f59e0b; }
+    .stat-card.completed .number { color: #22c55e; }
+    .stat-card.phone .number { font-size: 24px; color: #8b5cf6; }
+
     .profile-section {
         background: white;
         padding: 20px 25px;
         border-radius: 10px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        border: 1px solid #e2e8f0;
         margin: 20px 0 30px;
     }
     .profile-section table {
-        margin-top: 10px;
         width: 100%;
         max-width: 500px;
+        margin-top: 10px;
     }
     .profile-section td {
         padding: 6px 10px;
     }
-    .bookings-table {
+    .table-container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        overflow-x: auto;
+        border: 1px solid #e2e8f0;
+        margin-top: 15px;
+    }
+    table {
         width: 100%;
         border-collapse: collapse;
-        background: white;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        font-size: 14px;
     }
-    .bookings-table th {
-        background: #1a1a2e;
-        color: white;
-        padding: 12px 15px;
+    table th {
+        background: #f4f6f9;
         text-align: left;
+        padding: 10px 12px;
+        font-weight: 600;
     }
-    .bookings-table td {
-        padding: 12px 15px;
+    table td {
+        padding: 10px 12px;
         border-bottom: 1px solid #eee;
     }
-    .bookings-table tr:hover td {
+    table tr:hover td {
         background: #f9f9f9;
     }
-    .booking-status {
+    .status-badge {
         display: inline-block;
         padding: 4px 12px;
-        border-radius: 20px;
+        border-radius: 50px;
         font-size: 12px;
         font-weight: 600;
     }
-    .status-pending {
-        background: #fff3cd;
-        color: #856404;
+    .status-pending { background: #fef3c7; color: #92400e; }
+    .status-confirmed { background: #dbeafe; color: #1e40af; }
+    .status-completed { background: #dcfce7; color: #166534; }
+    .status-cancelled { background: #fee2e2; color: #991b1b; }
+    .btn-small {
+        padding: 4px 10px;
+        font-size: 12px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        background: #f97316;
+        color: white;
     }
-    .status-confirmed {
-        background: #cce5ff;
-        color: #004085;
-    }
-    .status-completed {
-        background: #d4edda;
-        color: #155724;
-    }
-    .status-cancelled {
-        background: #f8d7da;
-        color: #721c24;
-    }
-    .table-responsive {
-        overflow-x: auto;
+    .btn-small:hover {
+        background: #ea580c;
     }
     @media (max-width: 768px) {
-        .dashboard-header {
-            flex-direction: column;
-            gap: 10px;
-        }
-        .bookings-table th, .bookings-table td {
-            padding: 8px 10px;
-            font-size: 13px;
+        .dashboard-stats {
+            grid-template-columns: 1fr 1fr;
         }
     }
-';
-echo '<style>' . $extra_css . '</style>';
+    @media (max-width: 480px) {
+        .dashboard-stats {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
 
-include 'includes/footer.php';
-?>
+<?php include 'includes/footer.php'; ?>

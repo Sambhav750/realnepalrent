@@ -52,10 +52,7 @@ $completed_bookings = $conn->query("SELECT COUNT(*) FROM bookings WHERE Customer
             <div class="number"><?php echo $completed_bookings; ?></div>
             <div class="label">Completed</div>
         </div>
-        <div class="stat-card phone">
-            <div class="number"><?php echo $user['C_Phone'] ?: 'N/A'; ?></div>
-            <div class="label">Phone</div>
-        </div>
+        
     </div>
 
     <!-- Profile Section (Card) -->

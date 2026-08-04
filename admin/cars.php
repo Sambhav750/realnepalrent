@@ -127,7 +127,7 @@ $cars = $conn->query("SELECT * FROM cars ORDER BY CreatedAt DESC");
              margin-top: 30px; border-top: 1px solid #333; padding-top: 15px; }
 
         .sidebar .logout-link a {
-             color: var(--primary); }
+             color: #ef4444; }
 
         .main-content {
              margin-left: 250px; flex: 1; padding: 25px; }

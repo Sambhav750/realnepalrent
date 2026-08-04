@@ -117,6 +117,10 @@ $completed_bookings = $conn->query("SELECT COUNT(*) FROM bookings WHERE Customer
 
 <style>
     /* Add any missing styles to match admin */
+    :root{
+        --primary-color: #245481;
+    }
+
     .dashboard-header {
         display: flex;
         justify-content: space-between;
@@ -145,16 +149,16 @@ $completed_bookings = $conn->query("SELECT COUNT(*) FROM bookings WHERE Customer
     .stat-card .number {
         font-size: 32px;
         font-weight: 800;
-        color: #f97316;
+        color: var(--primary-color);
     }
     .stat-card .label {
         color: #64748b;
         font-size: 14px;
         margin-top: 4px;
     }
-    .stat-card.pending .number { color: #f59e0b; }
-    .stat-card.completed .number { color: #22c55e; }
-    .stat-card.phone .number { font-size: 24px; color: #8b5cf6; }
+    .stat-card.pending .number { color: var(--primary-color); }
+    .stat-card.completed .number { color: var(--primary-color); }
+    .stat-card.phone .number { font-size: 24px; color: var(--primary-color); }
 
     .profile-section {
         background: white;
@@ -218,11 +222,11 @@ $completed_bookings = $conn->query("SELECT COUNT(*) FROM bookings WHERE Customer
         cursor: pointer;
         text-decoration: none;
         display: inline-block;
-        background: #f97316;
+        background: var(--primary-color);
         color: white;
     }
     .btn-small:hover {
-        background: #ea580c;
+        background: var(--primary-color);
     }
     @media (max-width: 768px) {
         .dashboard-stats {

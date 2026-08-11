@@ -55,16 +55,31 @@ $completed_bookings = $conn->query("SELECT COUNT(*) FROM bookings WHERE Customer
         
     </div>
 
-    <!-- Profile Section (Card) -->
-    <div class="profile-section card">
-        <h3>My Profile</h3>
-        <table>
-            <tr><td><strong>Name:</strong></td><td><?php echo $user['C_Name']; ?></td></tr>
-            <tr><td><strong>Email:</strong></td><td><?php echo $user['C_Email']; ?></td></tr>
-            <tr><td><strong>Phone:</strong></td><td><?php echo $user['C_Phone'] ?: 'Not provided'; ?></td></tr>
-            <tr><td><strong>Registered:</strong></td><td><?php echo date('M d, Y', strtotime($user['CreatedAt'])); ?></td></tr>
-        </table>
-    </div>
+    <!-- Profile Section -->
+<div class="profile-section card">
+    <h3>My Profile</h3>
+    <table>
+        <tr><td><strong>Name:</strong></td><td><?php echo $user['C_Name']; ?></td></tr>
+        <tr><td><strong>Email:</strong></td><td><?php echo $user['C_Email']; ?></td></tr>
+        <tr><td><strong>Phone:</strong></td><td><?php echo $user['C_Phone'] ?: 'Not provided'; ?></td></tr>
+        <tr><td><strong>Registered:</strong></td><td><?php echo date('M d, Y', strtotime($user['CreatedAt'])); ?></td></tr>
+        <tr>
+            <td><strong>License Status:</strong></td>
+            <td>
+                <?php
+                $status = $user['License_Status'] ?? 'Pending';
+                if ($status == 'Verified') {
+                    echo '<span style="color: #22c55e; font-weight: bold;">✅ Verified</span>';
+                } elseif ($status == 'Rejected') {
+                    echo '<span style="color: #ef4444; font-weight: bold;">❌ Rejected</span>';
+                } else {
+                    echo '<span style="color: #f59e0b; font-weight: bold;">⏳ Pending</span>';
+                }
+                ?>
+            </td>
+        </tr>
+    </table>
+</div>
 
     <!-- Bookings Table -->
     <h3>My Bookings</h3>

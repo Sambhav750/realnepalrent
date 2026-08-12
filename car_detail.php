@@ -113,30 +113,47 @@ $total_reviews = $rating_data['total_reviews'] ?? 0;
         </div>
 
         <?php if ($car['Availability_Status'] == 'Available'): ?>
-            <div class="booking-section">
-                <h3>Book This Car</h3>
-                <?php if (isset($_SESSION['CustomerID'])): ?>
-                    <?php if (!empty($error)): ?>
-                        <div class="alert alert-danger"><?php echo $error; ?></div>
-                    <?php endif; ?>
-                    <form method="POST" action="">
-                        <div class="booking-form">
-                            <div class="form-group">
-                                <label>Pickup Date</label>
-                                <input type="date" name="start_date" min="<?php echo date('Y-m-d'); ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Return Date</label>
-                                <input type="date" name="end_date" min="<?php echo date('Y-m-d'); ?>" required>
-                            </div>
-                            <button type="submit" name="book" class="btn btn-primary">Book Now</button>
-                        </div>
-                    </form>
-                <?php else: ?>
-                    <p><a href="login.php">Login</a> or <a href="register.php">Register</a> to book this car.</p>
+    <div class="booking-section">
+        <h3>Book This Car</h3>
+        <?php if (isset($_SESSION['CustomerID'])): ?>
+            <?php
+            // Check if user is verified
+            $user_sql = "SELECT License_Status FROM customers WHERE CustomerID = " . $_SESSION['CustomerID'];
+            $user_result = $conn->query($user_sql);
+            $user_data = $user_result->fetch_assoc();
+            $license_status = $user_data['License_Status'] ?? 'Pending';
+            ?>
+            <?php if ($license_status == 'Verified'): ?>
+                <?php if (!empty($error)): ?>
+                    <div class="alert alert-danger"><?php echo $error; ?></div>
                 <?php endif; ?>
-            </div>
+                <form method="POST" action="">
+                    <div class="booking-form">
+                        <div class="form-group">
+                            <label>Pickup Date</label>
+                            <input type="date" name="start_date" min="<?php echo date('Y-m-d'); ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Return Date</label>
+                            <input type="date" name="end_date" min="<?php echo date('Y-m-d'); ?>" required>
+                        </div>
+                        <button type="submit" name="book" class="btn btn-primary">Book Now</button>
+                    </div>
+                </form>
+            <?php elseif ($license_status == 'Pending'): ?>
+                <div class="alert alert-warning" style="background: #fef3c7; color: #92400e; padding: 12px; border-radius: 5px;">
+                    ⏳ Your driving license is pending verification. Please wait for admin approval.
+                </div>
+            <?php else: ?>
+                <div class="alert alert-danger" style="background: #fee2e2; color: #991b1b; padding: 12px; border-radius: 5px;">
+                    ❌ Your driving license was rejected. Please contact admin.
+                </div>
+            <?php endif; ?>
+        <?php else: ?>
+            <p><a href="login.php">Login</a> or <a href="register.php">Register</a> to book this car.</p>
         <?php endif; ?>
+    </div>
+<?php endif; ?>
 
        
 

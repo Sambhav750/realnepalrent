@@ -153,8 +153,12 @@ $recent_bookings = $conn->query($recent_sql);
             font-size: 14px;
             margin-top: 5px;
         }
-        .stat-card.pending .number { color: var(--aprimary); }
-        .stat-card.revenue .number { color: var(--aprimary); }
+        .stat-card.pending .number { 
+            color: var(--aprimary); }
+
+        .stat-card.revenue .number { 
+            color: var(--aprimary); }
+
         .table-container {
             background: white;
             padding: 20px;
@@ -191,10 +195,22 @@ $recent_bookings = $conn->query($recent_sql);
             font-size: 12px;
             font-weight: 600;
         }
-        .status-pending { background: #fef3c7; color: #92400e; }
-        .status-confirmed { background: #dbeafe; color: #1e40af; }
-        .status-completed { background: #dcfce7; color: #166534; }
-        .status-cancelled { background: #fee2e2; color: #991b1b; }
+        .status-pending { 
+            background: #fef3c7; 
+            color: #92400e; }
+
+        .status-confirmed { 
+            background: #dbeafe; 
+            color: #1e40af; }
+
+        .status-completed { 
+            background: #dcfce7; 
+            color: #166534; }
+
+        .status-cancelled { 
+            background: #fee2e2; 
+            color: #991b1b; }
+
         .btn-small {
             padding: 4px 10px;
             font-size: 12px;
@@ -204,11 +220,14 @@ $recent_bookings = $conn->query($recent_sql);
             text-decoration: none;
             display: inline-block;
         }
-        .btn-primary { background: var(--aprimary); color: white; }
-        .btn-primary:hover { background: var(--aprimary); }
+        .btn-primary { 
+            background: var(--aprimary); 
+            color: white; }
+        .btn-primary:hover { 
+            background: var(--aprimary); }
 
         
-        }
+        
     </style>
 </head>
 <body>

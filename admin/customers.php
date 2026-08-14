@@ -44,51 +44,219 @@ $total_customers = $conn->query("SELECT COUNT(*) FROM customers")->fetch_row()[0
     <title>Manage Customers - NepalRent</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
-        .admin-body { display: flex; min-height: 100vh; background: #f4f6f9; }
-        .sidebar { width: 250px; background: #1a1a2e; color: white; padding: 20px 0; min-height: 100vh; position: fixed; left: 0; top: 0; bottom: 0; overflow-y: auto; }
-        .sidebar .logo { text-align: center; padding: 20px 0; border-bottom: 1px solid #333; margin-bottom: 20px; }
-        .sidebar .logo h2 { color: var(--primary); margin: 0; }
-        .sidebar .logo p { color: #888; font-size: 12px; margin: 5px 0 0; }
-        .sidebar ul { list-style: none; padding: 0; margin: 0; }
-        .sidebar ul li { padding: 12px 25px; border-left: 3px solid transparent; transition: all 0.3s; }
-        .sidebar ul li:hover { background: #2a2a4e; border-left-color: var(--primary); }
-        .sidebar ul li.active { background: #2a2a4e; border-left-color: var(--primary); }
-        .sidebar ul li a { color: #ccc; text-decoration: none; display: flex; align-items: center; gap: 12px; }
-        .sidebar ul li a:hover { color: white; }
-        .sidebar ul li a .icon { font-size: 18px; width: 25px; }
-        .sidebar .logout-link { margin-top: 30px; border-top: 1px solid #333; padding-top: 15px; }
-        .sidebar .logout-link a { color: var(--primary); }
-        .main-content { margin-left: 250px; flex: 1; padding: 25px; }
-        .main-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 10px; }
-        .main-header h1 { font-size: 24px; margin: 0; }
-        .main-header .admin-info { color: #888; font-size: 14px; }
-        .btn-small { padding: 4px 10px; font-size: 12px; border-radius: 5px; border: none; cursor: pointer; text-decoration: none; display: inline-block; }
-        .btn-success { background: var(--primary); color: white; }
-        .btn-success:hover { background: var(--primary); }
-        .btn-danger { background: var(--primary); color: white; }
-        .btn-danger:hover { background: var(--primary); }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-primary:hover { background: var(--primary); }
-        .btn-secondary { background: #64748b; color: white; }
-        .btn-secondary:hover { background: #475569; }
-        .table-container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; font-size: 14px; }
-        table th { background: #f4f6f9; text-align: left; padding: 10px 12px; font-weight: 600; }
-        table td { padding: 10px 12px; border-bottom: 1px solid #eee; }
-        table tr:hover td { background: #f9f9f9; }
-        .status-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-        .status-verified { background: #dcfce7; color: var(--primary); }
-        .status-pending { background: #fef3c7; color: var(--primary); }
-        .status-rejected { background: #fee2e2; color: var(--primary); }
-        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 25px; }
-        .stat-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-align: center; }
-        .stat-card .number { font-size: 28px; font-weight: bold; color: var(--primary); }
-        .stat-card .label { color: #888; font-size: 14px; margin-top: 5px; }
-        .search-bar { display: flex; gap: 10px; margin-bottom: 20px; }
-        .search-bar input { padding: 8px 12px; border: 1px solid #ddd; border-radius: 5px; flex: 1; }
-        .no-data { text-align: center; color: #888; padding: 30px; }
-        .alert { padding: 10px 15px; border-radius: 5px; margin-bottom: 15px; }
-        .alert-success { background: #dcfce7; color: var(--primary); border: 1px solid #86efac; }
+        .admin-body { 
+            display: flex;
+            min-height: 100vh; 
+            background: #f4f6f9; }
+
+        .sidebar {
+             width: 250px; 
+             background: #1a1a2e; 
+             color: white; 
+             padding: 20px 0; 
+             min-height: 100vh; 
+             position: fixed; 
+             left: 0; 
+             top: 0; 
+             bottom: 0; 
+             overflow-y: auto; }
+
+        .sidebar .logo { text-align: center; 
+        padding: 20px 0; 
+        border-bottom: 1px solid #333; 
+        margin-bottom: 20px; 
+        display: grid}
+
+        .sidebar .logo h2 { 
+        color: var(--primary);
+        margin: 0; }
+
+        .sidebar .logo p { 
+        color: #888; 
+        font-size: 12px; 
+        margin: 5px 0 0; }
+
+        .sidebar ul { list-style: none; 
+        padding: 0; 
+        margin: 0; }
+
+        .sidebar ul li { padding: 12px 25px; 
+        border-left: 3px solid transparent; 
+        transition: all 0.3s; }
+
+        .sidebar ul li:hover { background: #2a2a4e; 
+        border-left-color: var(--primary); }
+
+        .sidebar ul li.active { background: #2a2a4e; 
+        border-left-color: var(--primary); }
+
+        .sidebar ul li a { color: #ccc; 
+        text-decoration: none; 
+        display: flex; 
+        align-items: center; 
+        gap: 12px; }
+
+        .sidebar ul li a:hover { 
+            color: white; }
+
+        .sidebar ul li a .icon { 
+            font-size: 18px; 
+            width: 25px; }
+
+        .sidebar .logout-link { 
+            margin-top: 30px; 
+            border-top: 1px solid #333; 
+            padding-top: 15px; }
+
+        .sidebar .logout-link a { 
+            color: red; }
+
+        .main-content { 
+            margin-left: 250px; 
+            flex: 1; 
+            padding: 25px; }
+
+        .main-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 25px; 
+            flex-wrap: wrap; 
+            gap: 10px; }
+
+        .main-header h1 { 
+            font-size: 24px; 
+            margin: 0; }
+
+        .main-header .admin-info { 
+            color: #888; 
+            font-size: 14px; }
+
+        .btn-small { 
+            padding: 4px 10px; 
+            font-size: 12px; 
+            border-radius: 5px;
+            border: none; 
+            cursor: pointer; 
+            text-decoration: none; 
+            display: inline-block; }
+
+        .btn-success { 
+            background: var(--primary); 
+            color: white; }
+
+        .btn-success:hover { 
+            background: var(--primary); }
+
+        .btn-danger { 
+            background: var(--primary); 
+            color: white; }
+
+        .btn-danger:hover { 
+            background: var(--primary); }
+
+        .btn-primary { 
+            background: var(--primary); 
+            color: white; }
+
+        .btn-primary:hover { 
+            background: var(--primary); }
+
+        .btn-secondary { 
+            background: #64748b; 
+            color: white; }
+
+        .btn-secondary:hover { 
+            background: #475569; }
+
+        .table-container { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow-x: auto; }
+
+        table { 
+            width: 100%;
+            round: #f4f6f9; 
+            text-align: left; 
+            padding: 10px 12px; 
+            font-weight: 600; }
+
+        table td { 
+            padding: 10px 12px; 
+            border-bottom: 1px solid #eee; }
+
+        table tr:hover td { 
+            background: #f9f9f9; }
+
+        .status-badge { 
+            display: inline-block; 
+            padding: 3px 10px; 
+            border-radius: 20px; 
+            font-size: 12px; 
+            font-weight: 600; }
+
+        .status-verified { 
+            background: #dcfce7; 
+            color: var(--primary); }
+
+        .status-pending { 
+            background: #fef3c7; 
+            color: var(--primary); }
+
+        .status-rejected { 
+            background: #fee2e2; 
+            color: var(--primary); }
+
+        .stats-grid { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px; 
+            margin-bottom: 25px; }
+
+        .stat-card { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08); 
+            text-align: center; }
+
+        .stat-card .number { 
+            font-size: 28px; 
+            font-weight: bold; 
+            color: var(--primary); }
+
+        .stat-card .label { 
+            color: #888; 
+            font-size: 14px; 
+            margin-top: 5px; }
+
+        .search-bar { 
+            display: flex; 
+            gap: 10px; 
+            margin-bottom: 20px; }
+
+        .search-bar input { 
+            padding: 8px 12px; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+            flex: 1; }
+
+        .no-data { 
+            text-align: center; 
+            color: #888; 
+            padding: 30px; }
+
+        .alert { 
+            padding: 10px 15px; 
+            border-radius: 5px; 
+            margin-bottom: 15px; }
+            
+        .alert-success { 
+            background: #dcfce7; 
+            color: var(--primary); 
+            border: 1px solid #86efac; }
     </style>
 </head>
 <body>

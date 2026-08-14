@@ -32,17 +32,18 @@ if (isset($conn) && $conn) {
                     <li><a href="index.php">Home</a></li>
                     <li><a href="index.php#cars">Cars</a></li>
                     <?php if (isset($_SESSION['CustomerID'])): ?>
-                        <li><a href="dashboard.php">Dashboard</a></li>
-                        <li><a href="logout.php" class="btn-primary-nav">Logout</a></li>
-                    <?php else: ?>
-                        <li><a href="login.php">Login</a></li>
-                        <li><a href="register.php" class="btn-primary-nav">Register</a></li>
-                    <?php endif; ?>
-                    <li>
-                        <button id="darkModeToggle" class="dark-toggle" aria-label="Toggle dark mode">
-                            🌙
-                        </button>
-                    </li>
+                    <li><a href="dashboard.php">Dashboard</a></li>
+    <li><a href="logout.php" class="btn-primary-nav">Logout</a></li>
+<?php else: ?>
+    <li><a href="login.php">Login</a></li>
+    <?php 
+    // Hide Register button only on register.php page
+    $current_page = basename($_SERVER['PHP_SELF']);
+    if ($current_page != 'register.php'): 
+    ?>
+        <li><a href="register.php" class="btn-primary-nav">Register</a></li>
+    <?php endif; ?>
+<?php endif; ?>
                 </ul>
             </div>
         </div>

@@ -1168,25 +1168,6 @@ body.dark-mode .terms ul {
     color: var(--gray-500);
 }
 
-/* Dark Mode Overrides */
-body.dark-mode {
-    background: #0f172a;
-    color: #e2e8f0;
-}
 
-body.dark-mode .car-detail-image img {
-    background: var(--gray-700);
-}
 
-body.dark-mode .alert-success {
-    background: #14532d;
-    color: #86efac;
-    border-color: #15803d;
-}
-
-body.dark-mode .alert-danger {
-    background: #7f1d1d;
-    color: #fca5a5;
-    border-color: #991b1b;
-}
 

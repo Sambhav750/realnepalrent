@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['confirm_booking'])) {
             <div class="terms">
                 <p><strong>Terms & Conditions:</strong></p>
                 <ul>
-                    <li>A valid driving license is required at pickup</li>
+                    
                     <li>Advance payment of 20% is required to confirm booking</li>
                     <li>Cancellation policy: 100% refund if cancelled 48+ hours before pickup</li>
                     <li>Late return charges may apply</li>

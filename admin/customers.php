@@ -202,7 +202,7 @@ $total_customers = $conn->query("SELECT COUNT(*) FROM customers")->fetch_row()[0
             color: var(--primary); }
 
         .status-pending { 
-            background: #fef3c7; 
+            background:  var(--primary) 
             color: var(--primary); }
 
         .status-rejected { 
@@ -347,19 +347,12 @@ $total_customers = $conn->query("SELECT COUNT(*) FROM customers")->fetch_row()[0
                                     <td><?php echo $customer['C_Phone'] ?: 'N/A'; ?></td>
                                     <td><?php echo date('M d, Y', strtotime($customer['CreatedAt'])); ?></td>
                                     <td>
-                                        <?php if ($customer['License_Image']): ?>
-                                            <?php 
-                                            $file_path = $_SERVER['DOCUMENT_ROOT'] . '/NEPALRENT2.0/assets/uploads/licenses/' . $customer['License_Image'];
-                                            if (file_exists($file_path)): 
-                                            ?>
-                                                <a href="/NEPALRENT2.0/assets/uploads/licenses/<?php echo $customer['License_Image']; ?>" target="_blank" class="btn btn-small btn-primary">View</a>
+                                        <?php if (!empty($customer['License_Image'])): ?>
+                                        <a href="../assets/uploads/licenses/<?php echo $customer['License_Image']; ?>" target="_blank" class="btn btn-small btn-primary">View</a>
                                             <?php else: ?>
-                                                <span style="color:#ff6b6b;">File missing</span>
+                                                <span style="color:#888;">No license</span>
                                             <?php endif; ?>
-                                        <?php else: ?>
-                                            <span style="color:#888;">No license</span>
-                                        <?php endif; ?>
-                                    </td>
+                                        </td>
                                     <td>
                                         <?php
                                         $status = $customer['License_Status'] ?? 'Pending';

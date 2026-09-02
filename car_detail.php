@@ -196,6 +196,26 @@ $total_reviews = $rating_data['total_reviews'] ?? 0;
             </div>
         <?php endif; ?>
 
+                <div class="reviews-section">
+            <h3>Customer Reviews</h3>
+            <?php if ($reviews->num_rows > 0): ?>
+                <?php while ($review = $reviews->fetch_assoc()): ?>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <strong><?php echo $review['C_Name']; ?></strong>
+                            <span class="review-rating">⭐ <?php echo $review['Rating']; ?> / 5</span>
+                            <span class="review-date"><?php echo date('M d, Y', strtotime($review['Review_Date'])); ?></span>
+                        </div>
+                        <p><?php echo htmlspecialchars($review['Comment']); ?></p>
+                    </div>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <p>No reviews yet. Be the first to review!</p>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
 
 <?php
 include 'includes/footer.php';

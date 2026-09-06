@@ -131,7 +131,7 @@ $completed_bookings = $conn->query("SELECT COUNT(*) FROM bookings WHERE Customer
 </div>
 
 <style>
-    /* Add any missing styles to match admin */
+
     :root{
         --primary-color: #245481;
     }
@@ -243,16 +243,7 @@ $completed_bookings = $conn->query("SELECT COUNT(*) FROM bookings WHERE Customer
     .btn-small:hover {
         background: var(--primary-color);
     }
-    @media (max-width: 768px) {
-        .dashboard-stats {
-            grid-template-columns: 1fr 1fr;
-        }
-    }
-    @media (max-width: 480px) {
-        .dashboard-stats {
-            grid-template-columns: 1fr;
-        }
-    }
+
 </style>
 
 <?php include 'includes/footer.php'; ?>

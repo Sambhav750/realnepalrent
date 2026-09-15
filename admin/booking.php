@@ -26,6 +26,22 @@ if (isset($_POST['update_status'])) {
         $update_sql = "INSERT INTO booking_updates (BookingID, Updated_By, Update_Type, Old_Value, New_Value, Reason) 
                        VALUES ('$booking_id', 'Admin', 'Status_Change', '$old_status', '$new_status', 'Status updated by admin')";
         $conn->query($update_sql);
+
+     // If booking is confirmed, update car availability
+        if ($new_status == 'Confirmed') {
+            $car_sql = "SELECT CarID FROM bookings WHERE BookingID = $booking_id";
+            $car_result = $conn->query($car_sql);
+            $car_id = $car_result->fetch_assoc()['CarID'];
+            $conn->query("UPDATE cars SET Availability_Status = 'Booked' WHERE CarID = $car_id");
+        }
+        
+        // If booking is cancelled, make car available again
+        if ($new_status == 'Cancelled') {
+            $car_sql = "SELECT CarID FROM bookings WHERE BookingID = $booking_id";
+            $car_result = $conn->query($car_sql);
+            $car_id = $car_result->fetch_assoc()['CarID'];
+            $conn->query("UPDATE cars SET Availability_Status = 'Available' WHERE CarID = $car_id");
+        }
         
 
 ?>

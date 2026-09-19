@@ -42,6 +42,41 @@ if (isset($_POST['update_status'])) {
             $car_id = $car_result->fetch_assoc()['CarID'];
             $conn->query("UPDATE cars SET Availability_Status = 'Available' WHERE CarID = $car_id");
         }
+
+         // If booking is completed, make car available again and record final payment
+        if ($new_status == 'Completed') {
+            $car_sql = "SELECT CarID FROM bookings WHERE BookingID = $booking_id";
+            $car_result = $conn->query($car_sql);
+            $car_id = $car_result->fetch_assoc()['CarID'];
+            $conn->query("UPDATE cars SET Availability_Status = 'Available' WHERE CarID = $car_id");
+            
+            // Get total amount for this booking
+            $total_sql = "SELECT Total_Price FROM bookings WHERE BookingID = $booking_id";
+            $total_result = $conn->query($total_sql);
+            $total = $total_result->fetch_assoc()['Total_Price'];
+            
+            // Calculate advance (20%) and final (80%)
+            $advance = $total * 0.2;
+            $final = $total - $advance;
+            
+            // Check if final payment already exists
+            $check_pay = "SELECT * FROM payments WHERE BookingID = $booking_id AND Payment_Type = 'Final'";
+            $check_result = $conn->query($check_pay);
+            
+            if ($check_result->num_rows == 0) {
+                $pay_sql = "INSERT INTO payments (BookingID, Amount, Payment_Type, Payment_Method, Payment_Status) 
+                            VALUES ('$booking_id', '$final', 'Final', 'Cash', 'Paid')";
+                $conn->query($pay_sql);
+            }
+        }
+        
+        header("Location: bookings.php?msg=Booking status updated successfully");
+        exit();
+    } else {
+        $error = "Error updating status: " . $conn->error;
+    }
+}
+
         
 
 ?>

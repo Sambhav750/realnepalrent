@@ -76,6 +76,35 @@ if (isset($_POST['update_status'])) {
         $error = "Error updating status: " . $conn->error;
     }
 }
+/ Get filter values
+$status_filter = isset($_GET['status']) ? $_GET['status'] : '';
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+
+// Build query
+$sql = "SELECT b.*, c.Brand, c.Model, cust.C_Name, cust.C_Email, cust.C_Phone 
+        FROM bookings b 
+        JOIN cars c ON b.CarID = c.CarID 
+        JOIN customers cust ON b.CustomerID = cust.CustomerID 
+        WHERE 1=1";
+
+if (!empty($status_filter)) {
+    $sql .= " AND b.Booking_Status = '$status_filter'";
+}
+
+if (!empty($search)) {
+    $sql .= " AND (b.BookingID LIKE '%$search%' OR cust.C_Name LIKE '%$search%' OR c.Brand LIKE '%$search%')";
+}
+
+$sql .= " ORDER BY b.Booking_Date DESC";
+$bookings = $conn->query($sql);
+
+// Get status counts
+$total_count = $conn->query("SELECT COUNT(*) FROM bookings")->fetch_row()[0];
+$pending_count = $conn->query("SELECT COUNT(*) FROM bookings WHERE Booking_Status = 'Pending'")->fetch_row()[0];
+$confirmed_count = $conn->query("SELECT COUNT(*) FROM bookings WHERE Booking_Status = 'Confirmed'")->fetch_row()[0];
+$completed_count = $conn->query("SELECT COUNT(*) FROM bookings WHERE Booking_Status = 'Completed'")->fetch_row()[0];
+$cancelled_count = $conn->query("SELECT COUNT(*) FROM bookings WHERE Booking_Status = 'Cancelled'")->fetch_row()[0];
+?>
 
         
 

@@ -83,11 +83,11 @@ $recent_bookings = $conn->query($recent_sql);
         }
         .sidebar ul li:hover {
             background: #2a2a4e;
-            border-left-color: #f97316;
+            border-left-color: var(--primary);;
         }
         .sidebar ul li.active {
             background: #2a2a4e;
-            border-left-color: #f97316;
+            border-left-color: var(--primary);;
         }
         .sidebar ul li a {
             color: #ccc;
@@ -109,7 +109,7 @@ $recent_bookings = $conn->query($recent_sql);
             padding-top: 15px;
         }
         .sidebar .logout-link a {
-            color: #ef4444;
+            color: var(--primary);;
         }
         .main-content {
             margin-left: 250px;

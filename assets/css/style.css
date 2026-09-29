@@ -150,6 +150,12 @@ body.dark-mode .nav-links a:hover {
     align-items: center;
     gap: 6px;
 }
+/* forget password */
+form-group a {
+    font-size: 13px;
+    color: var(--primary);
+    text-decoration: none;
+}
 
 body.dark-mode .header-available-badge {
     background: #15803d;

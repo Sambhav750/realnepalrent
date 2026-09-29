@@ -47,6 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label>Password</label>
                 <input type="password" name="password" required>
             </div>
+            
+            <div class="form-group">
+                <a href="forgot_password.php">Forgot Password?</a>
+            </div>
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
         <p>Don't have an account? <a href="register.php">Register</a></p>
